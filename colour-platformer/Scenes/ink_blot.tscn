@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://dkohch4qhcxmd"]
+
+[ext_resource type="Script" uid="uid://bq3xy5fqrpfo8" path="res://Scenes/ink_blot.gd" id="1_skceq"]
+[ext_resource type="Texture2D" uid="uid://b3i2oxebhcpsw" path="res://Sprites/inkBlot.png" id="2_skceq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yxe0m"]
+radius = 9.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n5pgc"]
+atlas = ExtResource("2_skceq")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pcxnl"]
+atlas = ExtResource("2_skceq")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pcxnl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n5pgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pcxnl")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 1.0
+}]
+
+[node name="InkBlot" type="Area2D"]
+script = ExtResource("1_skceq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_yxe0m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_pcxnl")
+animation = &"idle"
+autoplay = "idle"

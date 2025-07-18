@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://jkgg2gfpo11n"]
+
+[ext_resource type="Texture2D" uid="uid://besa0hxw3wwa2" path="res://Sprites/icon.svg" id="1_3hls8"]
+[ext_resource type="Script" uid="uid://dxycmktqhwnsm" path="res://Scripts/player.gd" id="1_hbghi"]
+[ext_resource type="Texture2D" uid="uid://cxji31l87vyl6" path="res://Sprites/ink_blob_idle_squish_sprite_sheet_16x16.png" id="2_hn12h"]
+[ext_resource type="PackedScene" uid="uid://dkohch4qhcxmd" path="res://Scenes/ink_blot.tscn" id="4_7p6j4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hbghi"]
+size = Vector2(16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ihfcg"]
+atlas = ExtResource("2_hn12h")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rka8t"]
+atlas = ExtResource("2_hn12h")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hph3"]
+atlas = ExtResource("2_hn12h")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7kpp"]
+atlas = ExtResource("2_hn12h")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bjebc"]
+resource_local_to_scene = true
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ihfcg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rka8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hph3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7kpp")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hn12h"]
+size = Vector2(128.906, 120)
+
+[node name="Level 1" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(176, 477)
+script = ExtResource("1_hbghi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("RectangleShape2D_hbghi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_bjebc")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(3, 3)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(636, 585)
+scale = Vector2(10.24, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0.683601, -4)
+shape = SubResource("RectangleShape2D_hn12h")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_3hls8")
+
+[node name="InkBlot" parent="." instance=ExtResource("4_7p6j4")]
+position = Vector2(293, 487)
+
+[node name="InkBlot2" parent="." instance=ExtResource("4_7p6j4")]
+position = Vector2(374, 487)
+ink_color = Color(1, 0, 0, 1)
+
+[node name="InkBlot3" parent="." instance=ExtResource("4_7p6j4")]
+position = Vector2(431, 486)
+ink_color = Color(0, 0, 1, 1)
+
+[node name="InkBlot4" parent="." instance=ExtResource("4_7p6j4")]
+position = Vector2(500, 487)
+ink_color = Color(1, 1, 0, 1)
